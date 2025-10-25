@@ -1,19 +1,17 @@
-import 'package:android_flutter_working_structure/pages/oyun.dart';
+import 'package:android_flutter_working_structure/pages/sonuc.dart';
 import 'package:flutter/material.dart';
 
-class Anasayfa extends StatefulWidget {
-  const Anasayfa({super.key});
-
+class Oyun extends StatefulWidget {
   @override
-  State<Anasayfa> createState() => _AnasayfaState();
+  State<Oyun> createState() => _OyunState();
 }
 
-class _AnasayfaState extends State<Anasayfa> {
+class _OyunState extends State<Oyun> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ana Sayfa"),
+        title: Text("Oyun Sayfası"),
         backgroundColor: Colors.deepOrange,
       ),
       body: Center(
@@ -22,9 +20,10 @@ class _AnasayfaState extends State<Anasayfa> {
           children: [
             ElevatedButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Oyun()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Sonuc()));
+                  /// Böylece oyun ekranı geçiş yaparken silinir.
                 },
-                child: Text("Oyuna başla")
+                child: Text("Oyunu bitir")
             ),
           ],
         ),
