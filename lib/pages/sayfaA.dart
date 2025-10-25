@@ -1,9 +1,21 @@
-import 'package:android_flutter_working_structure/pages/anasayfa.dart';
-import 'package:android_flutter_working_structure/pages/sayfaB.dart';
+import 'package:android_flutter_working_structure/classes/kisiler.dart';
+import './anasayfa.dart';
 import 'package:flutter/material.dart';
 
 class SayfaA extends StatefulWidget {
-  const SayfaA({super.key});
+  /** TEK TEK YOLLAMA
+   *  String isim;
+      int yas;
+      double boy;
+      bool bekarmi;
+
+  SayfaA({required this.isim, required this.yas,
+    required this.boy, required this.bekarmi}); ///-> Böylece yazarak gönderebiliriz.
+  **/
+
+  Kisiler kisi;
+
+  SayfaA({required this.kisi});
 
   @override
   State<SayfaA> createState() => _SayfaAState();
@@ -33,16 +45,18 @@ class _SayfaAState extends State<SayfaA> {
                 backgroundColor: Colors.pink,
               ),
             ),
-            ElevatedButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>SayfaB()));
-              },
-              child: Text("Sayfa B'ye Git"),
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.pink,
-              ),
-            ),
+            /*
+            /// Veriler bu şekilde kullanlır.
+            Text("İsim : ${widget.isim}"),
+            Text("Yaş : ${widget.yas}"),
+            Text("Boy : ${widget.boy}"),
+            Text("Durum : ${widget.bekarmi}"),
+            */
+            /// Veriler bu şekilde kullanlır.
+            Text("İsim : ${widget.kisi.isim}"),
+            Text("Yaş : ${widget.kisi.yas}"),
+            Text("Boy : ${widget.kisi.boy}"),
+            Text("Durum : ${widget.kisi.bekarmi}"),
           ],
         ),
       ),
