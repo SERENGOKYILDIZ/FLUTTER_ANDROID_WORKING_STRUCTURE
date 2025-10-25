@@ -1,4 +1,3 @@
-import 'package:android_flutter_working_structure/pages/diger.dart';
 import 'package:flutter/material.dart';
 
 class Anasayfa extends StatefulWidget {
@@ -8,7 +7,13 @@ class Anasayfa extends StatefulWidget {
 
 class _AnasayfaState extends State<Anasayfa>{
 
-  bool kontrol=false;
+  Future<int> faktoriyelHesapla(int sayi) async {
+    int sonuc = 1;
+    for(var i=1;i<=sayi;i++) {
+      sonuc=sonuc * i;
+    }
+    return sonuc;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,57 +26,23 @@ class _AnasayfaState extends State<Anasayfa>{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /*
-            Visibility(
-                visible: kontrol, ///-> Widget durumunu bir değişkene atadık.
-                child: Text("Merhaba")
-            ),
-            */
-            Text(kontrol ? "Doğru" : "Yanlış",
-            style: TextStyle(
-                color: kontrol ? Colors.green : Colors.red,
-                fontWeight: FontWeight.bold
-              ),
-            ),
-            ElevatedButton(
-              child: Text("Durum 1"),
-              onPressed: (){
-                setState(() {
-                  kontrol=true;
-                });
+            FutureBuilder<int>(
+              future: faktoriyelHesapla(5),
+              builder: (context, snapshot){
+                if(snapshot.hasError)
+                {
+                  print("Hata sonucu : ${snapshot.error}");
+                }
+                if(snapshot.hasData)
+                {
+                  return Text("Sonuc : ${snapshot.data}");
+                }
+                else
+                {
+                  return Text("Sonuc YOK");
+                }
               },
             ),
-            ElevatedButton(
-              child: Text("Durum 2"),
-              onPressed: (){
-                setState(() {
-                  kontrol=false;
-                });
-              },
-            ),
-            /// body içinde koşullu tasarım
-            ?((){
-              if(kontrol)
-              {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.star),
-                    Text("Yıldız")
-                  ],
-                );
-              }
-              else
-              {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.dark_mode),
-                    Text("Ay")
-                  ],
-                );
-              }
-            }()),
           ],
         ),
       ),
