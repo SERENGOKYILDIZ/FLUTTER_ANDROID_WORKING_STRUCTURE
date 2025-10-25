@@ -6,21 +6,6 @@ class Diger extends StatefulWidget {
 }
 
 class _DigerState extends State<Diger> {
-
-  @override
-  void deactivate() {
-    // TODO: implement deactivate
-    super.deactivate();
-    print("YAŞAM TAKİP (Diğer Sayfa) => deactivate() çalıştı!");
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    print("YAŞAM TAKİP (Diğer Sayfa) => dispose() çalıştı!");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

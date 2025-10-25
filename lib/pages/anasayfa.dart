@@ -6,44 +6,12 @@ class Anasayfa extends StatefulWidget {
   State<Anasayfa> createState() => _AnasayfaState();
 }
 
-/// Yaşam döngüsü için "with WidgetsBindingObserver" ekledik.
-class _AnasayfaState extends State<Anasayfa> with WidgetsBindingObserver{
+class _AnasayfaState extends State<Anasayfa>{
 
-  @override
-  void initState() {
-    print("YAŞAM TAKİP => initState() çalıştı!");
-    WidgetsBinding.instance.addObserver(this); /// Yaşam döngüsü için yazdık.
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    WidgetsBinding.instance.removeObserver(this); /// Yaşam döngüsü için yazdık.
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.inactive)
-    {
-      print("YAŞAM TAKİP => inactive() çalıştı!");
-    }
-    if(state == AppLifecycleState.paused)
-    {
-      print("YAŞAM TAKİP => paused() çalıştı!");
-    }
-    if(state == AppLifecycleState.resumed)
-    {
-      print("YAŞAM TAKİP => resumed() çalıştı!");
-    }
-    if(state == AppLifecycleState.detached)
-    {
-      print("YAŞAM TAKİP => detached() çalıştı!");
-    }
-  }
+  bool kontrol=false;
 
   @override
   Widget build(BuildContext context) {
-    print("YAŞAM TAKİP => build() çalıştı!");
     return Scaffold(
       appBar: AppBar(
         title: Text("Ana Sayfa"),
@@ -53,12 +21,57 @@ class _AnasayfaState extends State<Anasayfa> with WidgetsBindingObserver{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Diger()));
-                },
-                child: Text("Diğer Sayfaya geç")
+            /*
+            Visibility(
+                visible: kontrol, ///-> Widget durumunu bir değişkene atadık.
+                child: Text("Merhaba")
             ),
+            */
+            Text(kontrol ? "Doğru" : "Yanlış",
+            style: TextStyle(
+                color: kontrol ? Colors.green : Colors.red,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            ElevatedButton(
+              child: Text("Durum 1"),
+              onPressed: (){
+                setState(() {
+                  kontrol=true;
+                });
+              },
+            ),
+            ElevatedButton(
+              child: Text("Durum 2"),
+              onPressed: (){
+                setState(() {
+                  kontrol=false;
+                });
+              },
+            ),
+            /// body içinde koşullu tasarım
+            ?((){
+              if(kontrol)
+              {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.star),
+                    Text("Yıldız")
+                  ],
+                );
+              }
+              else
+              {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.dark_mode),
+                    Text("Ay")
+                  ],
+                );
+              }
+            }()),
           ],
         ),
       ),
