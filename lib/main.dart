@@ -19,7 +19,10 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+/**
+ * NOT: Sayfayı güncelleme için kullanılan methot setState() kullanmak için class
+ * StatefulWidget olmalı.
+ * */
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -29,6 +32,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  int sayac=0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +43,21 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-      ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: (){
+                  setState(() {
+                    sayac++;
+                  });
+                },
+                child: Text("Tıkla")
+            ),
+            Text("Deger : $sayac"),
+          ],
+        ),
+      )
     );
   }
 }
